@@ -37,7 +37,7 @@ public class MusicPlayer2Activity extends Activity {
                     // do nothing
                 } finally {
                     finish();
-                    startActivity(new Intent(MusicPlayer2Activity.this, Selection.class));
+                    startActivity(new Intent(MusicPlayer2Activity.this,Selection.class));
                     stop();
                 }
             }

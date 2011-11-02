@@ -13,6 +13,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:label="@string/app_name" android:name=".ArtistSelection"></activity>
+        <activity android:label="@string/app_name" android:name=".Selection"></activity>
+        <activity android:label="@string/app_name" android:name=".AlbumSelection"></activity>
+        <activity android:label="@string/app_name" android:name=".SongSelection"></activity>
 
     </application>
 </manifest>
