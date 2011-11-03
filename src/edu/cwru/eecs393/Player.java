@@ -27,27 +27,27 @@ public class Player extends Activity implements OnClickListener {
         catch (IllegalArgumentException e) {}
         catch (IllegalStateException e) {}*/
         
-        Button button2 = (Button)this.findViewById(R.id.btnPlay);
-        button2.setOnClickListener(this);
+        Button btnPlay = (Button)this.findViewById(R.id.btnPlay);
+        btnPlay.setOnClickListener(this);
         
-        Button button1 = (Button)this.findViewById(R.id.btnPause);
-        button1.setOnClickListener(this);
+        Button btnPause = (Button)this.findViewById(R.id.btnPause);
+        btnPause.setOnClickListener(this);
         
-        Button button3 = (Button)this.findViewById(R.id.btnStop);
-        button3.setOnClickListener(this);
+        Button btnStop = (Button)this.findViewById(R.id.btnStop);
+        btnStop.setOnClickListener(this);
     }
 
 	public void onClick(View v) 
 	{
-		if (v == findViewById(R.id.btnPlay))
+		if (v.getId() == R.id.btnPlay)
 		{
 			mp.start();
 		}
-		else if (v == findViewById(R.id.btnPause))
+		else if (v.getId() == R.id.btnPause)
 		{
 			mp.pause();
 		}
-		else if (v == findViewById(R.id.btnStop))
+		else if (v.getId() == R.id.btnStop)
 		{
 			mp.stop();
 		}
