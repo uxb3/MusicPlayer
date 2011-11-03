@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, MusicPlayer2Activity!</string>
     <string name="app_name">MusicPlayer2</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
 </resources>

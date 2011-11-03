@@ -1,24 +1,40 @@
 package edu.cwru.eecs393;
 
-import android.app.Activity;
+import java.util.List;
+
+import android.app.ListActivity;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.ScrollView;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TableLayout;
 
-public class SongSelection extends Activity {
+public class SongSelection extends ListActivity {
 
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		ScrollView scroll = new ScrollView(this);
-		TableLayout table = new TableLayout(this);
-		loadTable(table);
-		scroll.addView(table);
-		setContentView(scroll);
+		//setContentView(R.layout.);
+		Cursor mCursor = Playlists.music.getCursor();
+		startManagingCursor(mCursor);
+		
+		ListAdapter adapter = new SimpleCursorAdapter(
+				this, 
+				R.layout.list_item,mCursor,
+				new String[] {MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST}, 
+				new int[] {R.id.textTitle, R.id.textArtist});
+		
+		setListAdapter(adapter);
 	}
 	
-	private void loadTable(TableLayout table)
+	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
-		
+		Playlists.clearNowPlaying();
+		Playlists.addNowPlaying(Playlists.music.mItems.get(position));
+		Playlists.currentSong = 0;
+		//make call to start music player activity
 	}
 }

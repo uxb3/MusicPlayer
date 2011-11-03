@@ -21,6 +21,14 @@ public class MusicPlayer2Activity extends Activity {
         
         setContentView(R.layout.main);
         
+        Thread prepareThread = new Thread() {
+        	@Override
+        	public void run() {
+        		Playlists.prepare(getContentResolver());
+        	}
+        };
+        prepareThread.start();
+        
         // thread for displaying the SplashScreen
         Thread splashTread = new Thread() {
             @Override
