@@ -1,5 +1,6 @@
 package edu.cwru.eecs393;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentResolver;
@@ -12,6 +13,7 @@ public class Playlists {
 	
 	static void prepare(ContentResolver cr)
 	{
+		nowPlaying = new ArrayList<MusicRetriever.Item>();
 		music = new MusicRetriever(cr);
 		music.prepare();
 	}

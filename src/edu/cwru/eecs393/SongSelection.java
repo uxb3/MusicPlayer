@@ -1,8 +1,7 @@
 package edu.cwru.eecs393;
 
-import java.util.List;
-
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TableLayout;
 
 public class SongSelection extends ListActivity {
 
@@ -36,5 +34,6 @@ public class SongSelection extends ListActivity {
 		Playlists.addNowPlaying(Playlists.music.mItems.get(position));
 		Playlists.currentSong = 0;
 		//make call to start music player activity
+		startActivity(new Intent(SongSelection.this,Player.class));
 	}
 }

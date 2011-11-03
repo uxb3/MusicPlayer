@@ -11,7 +11,6 @@ import android.widget.Button;
 public class Player extends Activity {
 	
 	MediaPlayer mp;
-	Uri someuri;
 	
 	 // Create an anonymous implementation of OnClickListener
     private OnClickListener PlayListener = new OnClickListener() {
@@ -37,7 +36,9 @@ public class Player extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mp = MediaPlayer.create(getBaseContext(), someuri);
+        setContentView(R.layout.player);
+        if(Playlists.currentSong >= 0)
+        	mp = MediaPlayer.create(getBaseContext(), Playlists.nowPlaying.get(Playlists.currentSong).getURI());
         /*try {
             mp.setDataSource(soundUrl);
             mp.prepare();

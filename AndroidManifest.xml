@@ -17,6 +17,7 @@
         <activity android:label="@string/app_name" android:name=".Selection"></activity>
         <activity android:label="@string/app_name" android:name=".AlbumSelection"></activity>
         <activity android:label="@string/app_name" android:name=".SongSelection"></activity>
+        <activity android:name=".Player" android:label="@string/app_name"></activity>
 
     </application>
 </manifest>
