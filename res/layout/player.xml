@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="33dp"
-        android:layout_y="348dp"
-        android:text="@string/play" />
+    android:layout_height="fill_parent" >
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="208dp"
@@ -19,11 +12,18 @@
         android:text="@string/stop" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="127dp"
         android:layout_y="287dp"
         android:text="@string/pause" />
+    <Button 
+    	android:text="@string/play" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/btnPlay" 
+    	android:layout_x="38dp" 
+    	android:layout_y="288dp"></Button>
 
 </AbsoluteLayout>
