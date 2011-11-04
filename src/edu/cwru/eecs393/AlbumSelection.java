@@ -37,8 +37,8 @@ public class AlbumSelection extends ExpandableListActivity {
 		PlayerState.addNowPlaying(songs.get(groupPosition).get(childPosition));
 		PlayerState.currentSong = 0;
 		try {
-			if (PlayerState.mp == null)
-				PlayerState.mp = MediaPlayer.create(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());
+			if(PlayerState.mp == null)
+				PlayerState.createMediaPlayer(getBaseContext());
 			else
 			{
 				PlayerState.mp.reset();

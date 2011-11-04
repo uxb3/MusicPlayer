@@ -8,10 +8,16 @@ import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class SongSelection extends ListActivity {
 
@@ -30,6 +36,7 @@ public class SongSelection extends ListActivity {
 				new int[] {R.id.textTitle, R.id.textArtist});
 		
 		setListAdapter(adapter);
+		registerForContextMenu(getListView());
 	}
 	
 	protected void onListItemClick(ListView l, View v, int position, long id)
@@ -39,7 +46,7 @@ public class SongSelection extends ListActivity {
 		PlayerState.currentSong = 0;
 		try {
 			if (PlayerState.mp == null)
-				PlayerState.mp = MediaPlayer.create(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());
+				PlayerState.createMediaPlayer(getBaseContext());
 			else
 			{
 				PlayerState.mp.reset();
@@ -65,5 +72,61 @@ public class SongSelection extends ListActivity {
 		
 		//make call to start music player activity
 		startActivity(new Intent(SongSelection.this,Player.class));
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+		    ContextMenuInfo menuInfo) {
+		if(v == getListView())
+		{
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			menu.setHeaderTitle("Actions");
+			menu.add(Menu.NONE,0,0, "Add to Queue");
+		}
+	}
+	
+	public boolean onContextItemSelected(MenuItem item)
+	{
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+		if(item.getItemId() == 0)
+		{
+			int songId = info.position;
+			PlayerState.addNowPlaying(MusicRetriever.mItems.get(songId));
+			
+			Toast toast = Toast.makeText(this, "Song added to queue.", Toast.LENGTH_SHORT);
+			toast.show();
+			
+			if(PlayerState.nowPlaying.size() == 1)
+			{
+				PlayerState.currentSong = 0;
+				try {
+					if (PlayerState.mp == null)
+						PlayerState.mp = MediaPlayer.create(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());
+					else
+					{
+						PlayerState.mp.reset();
+						PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());	
+						PlayerState.mp.prepare();
+					}
+
+					PlayerState.play = true;
+					PlayerState.mp.start();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		startActivity(new Intent(SongSelection.this,Player.class));
+		return true;
 	}
 }

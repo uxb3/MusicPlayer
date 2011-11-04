@@ -40,7 +40,7 @@ public class ArtistSelection extends ExpandableListActivity{
 		PlayerState.currentSong = 0;
 		try {
 			if (PlayerState.mp == null)
-				PlayerState.mp = MediaPlayer.create(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());
+				PlayerState.createMediaPlayer(getBaseContext());
 			else
 			{
 				PlayerState.mp.reset();
