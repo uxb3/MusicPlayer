@@ -10,15 +10,13 @@ import android.widget.Button;
 
 public class Player extends Activity implements OnClickListener {
 	
-	MediaPlayer mp;
-	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
-        if(Playlists.currentSong >= 0)
-        	mp = MediaPlayer.create(getBaseContext(), Playlists.nowPlaying.get(Playlists.currentSong).getURI());
+        if(PlayerState.mp == null)
+        	PlayerState.mp = MediaPlayer.create(getBaseContext(), null);
         /*try {
             mp.setDataSource(soundUrl);
             mp.prepare();

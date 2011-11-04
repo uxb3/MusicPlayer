@@ -24,7 +24,7 @@ public class MusicPlayer2Activity extends Activity {
         Thread prepareThread = new Thread() {
         	@Override
         	public void run() {
-        		Playlists.prepare(getContentResolver());
+        		PlayerState.prepare(getContentResolver());
         	}
         };
         prepareThread.start();

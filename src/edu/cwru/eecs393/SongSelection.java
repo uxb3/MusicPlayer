@@ -16,12 +16,13 @@ public class SongSelection extends ListActivity {
 	{
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.);
-		Cursor mCursor = Playlists.music.getSongsCursor();
-		startManagingCursor(mCursor);
+		Cursor mCursor = PlayerState.music.getSongsCursor();
+		startManagingCursor(mCursor);						//this will requery the MediaStore every time this activity is reloaded
 		
 		ListAdapter adapter = new SimpleCursorAdapter(
 				this, 
-				R.layout.list_item,mCursor,
+				R.layout.list_item,
+				mCursor,
 				new String[] {MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST}, 
 				new int[] {R.id.textTitle, R.id.textArtist});
 		
@@ -30,9 +31,9 @@ public class SongSelection extends ListActivity {
 	
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
-		Playlists.clearNowPlaying();
-		Playlists.addNowPlaying(Playlists.music.mItems.get(position));
-		Playlists.currentSong = 0;
+		PlayerState.clearNowPlaying();
+		PlayerState.addNowPlaying(PlayerState.music.mItems.get(position));
+		PlayerState.currentSong = 0;
 		//make call to start music player activity
 		startActivity(new Intent(SongSelection.this,Player.class));
 	}

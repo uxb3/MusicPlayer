@@ -31,9 +31,9 @@ public class AlbumSelection extends ExpandableListActivity {
 	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
 	{
-		Playlists.clearNowPlaying();
-		Playlists.addNowPlaying(songs.get(groupPosition).get(childPosition));
-		Playlists.currentSong = 0;
+		PlayerState.clearNowPlaying();
+		PlayerState.addNowPlaying(songs.get(groupPosition).get(childPosition));
+		PlayerState.currentSong = 0;
 		//make call to start music player activity
 		startActivity(new Intent(AlbumSelection.this,Player.class));
 		return true;
