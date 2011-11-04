@@ -16,7 +16,7 @@ public class SongSelection extends ListActivity {
 	{
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.);
-		Cursor mCursor = Playlists.music.getCursor();
+		Cursor mCursor = Playlists.music.getSongsCursor();
 		startManagingCursor(mCursor);
 		
 		ListAdapter adapter = new SimpleCursorAdapter(
