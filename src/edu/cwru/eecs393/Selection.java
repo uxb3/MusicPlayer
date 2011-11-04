@@ -1,6 +1,7 @@
 package edu.cwru.eecs393;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.TabHost;
 
@@ -33,7 +34,10 @@ public class Selection extends TabActivity {
         spec = tabHost.newTabSpec("songs").setIndicator("Songs").setContent(intent);
         tabHost.addTab(spec);
         
-        tabHost.setCurrentTab(0);
+        //if(PlayerState.mp == null)
+        //	PlayerState.mp = MediaPlayer.create(this, null);
+        
+        tabHost.setCurrentTab(2);
     }
 	
 }

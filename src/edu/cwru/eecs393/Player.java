@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class Player extends Activity implements OnClickListener {
 	
+	Button btnPlay, btnPause, btnStop;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,33 +26,66 @@ public class Player extends Activity implements OnClickListener {
         catch (IllegalArgumentException e) {}
         catch (IllegalStateException e) {}*/
         
-        Button btnPlay = (Button)this.findViewById(R.id.btnPlay);
+        btnPlay = (Button)this.findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
         
-        Button btnPause = (Button)this.findViewById(R.id.btnPause);
+        btnPause = (Button)this.findViewById(R.id.btnPause);
         btnPause.setOnClickListener(this);
         
-        Button btnStop = (Button)this.findViewById(R.id.btnStop);
+        btnStop = (Button)this.findViewById(R.id.btnStop);
         btnStop.setOnClickListener(this);
+        
+        if(PlayerState.mp.isPlaying())
+        {
+        	btnPlay.setEnabled(false);
+        	btnPause.setEnabled(true);
+        	btnStop.setEnabled(true);
+        }
+        else if(PlayerState.nowPlaying.size() > 0)
+        {
+        	btnPlay.setEnabled(true);
+        	btnPause.setEnabled(false);
+        	btnStop.setEnabled(false);
+        }
+        else
+        {
+        	btnPlay.setEnabled(false);
+        	btnPause.setEnabled(false);
+        	btnStop.setEnabled(false);
+        }
     }
 
 	public void onClick(View v) 
 	{
 		if (v.getId() == R.id.btnPlay)
 		{
-			mp.start();
+			if(PlayerState.nowPlaying.size()>0)
+			{
+				PlayerState.play = true;
+				btnPause.setEnabled(true);
+				btnPlay.setEnabled(false);
+				btnStop.setEnabled(true);
+				PlayerState.mp.start();
+			}
 		}
 		else if (v.getId() == R.id.btnPause)
 		{
-			mp.pause();
+			if(PlayerState.mp.isPlaying())
+			{
+				PlayerState.mp.pause();
+				btnPlay.setEnabled(true);
+				btnPause.setEnabled(false);
+				btnStop.setEnabled(true);
+			}
 		}
 		else if (v.getId() == R.id.btnStop)
 		{
-			mp.stop();
+			PlayerState.play = false;
+			PlayerState.mp.stop();
+			PlayerState.nowPlaying.clear();
+			btnPlay.setEnabled(false);
+			btnPause.setEnabled(false);
+			btnStop.setEnabled(false);	
 		}
 	}
-    
-
-
-    
 }

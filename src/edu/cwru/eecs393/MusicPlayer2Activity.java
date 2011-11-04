@@ -50,6 +50,9 @@ public class MusicPlayer2Activity extends Activity {
                 }
             }
         };
-        splashTread.start();
+        if(PlayerState.nowPlaying == null)
+        	splashTread.start();
+        else
+        	startActivity(new Intent(MusicPlayer2Activity.this,Selection.class));
     }
 }
