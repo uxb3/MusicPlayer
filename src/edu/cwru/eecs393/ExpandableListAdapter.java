@@ -13,10 +13,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 	private Context context;
 	private ArrayList<String> groups;
-	private ArrayList<ArrayList<MusicRetriever.Item>> songs;
+	private ArrayList<ArrayList<Item>> songs;
 	private boolean groupArtist;
 	
-	public ExpandableListAdapter(Context cont, ArrayList<String> group, ArrayList<ArrayList<MusicRetriever.Item>> song, String groupBy)
+	public ExpandableListAdapter(Context cont, ArrayList<String> group, ArrayList<ArrayList<Item>> song, String groupBy)
 	{
 		context = cont;
 		groups = group;
@@ -47,7 +47,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		MusicRetriever.Item song = (MusicRetriever.Item)getChild(groupPosition, childPosition);
+		Item song = (Item)getChild(groupPosition, childPosition);
 		
 		if(convertView == null)
 		{

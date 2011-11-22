@@ -16,7 +16,7 @@ import android.widget.TableLayout;
 public class ArtistSelection extends ExpandableListActivity{
 
 	ArrayList<String> artists;
-	ArrayList<ArrayList<MusicRetriever.Item>> songs;
+	ArrayList<ArrayList<Item>> songs;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{

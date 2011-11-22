@@ -10,7 +10,7 @@ import android.media.MediaPlayer;
 
 public class PlayerState{
 	static MusicRetriever music;
-	static List<MusicRetriever.Item> nowPlaying;
+	static List<Item> nowPlaying;
 	static int currentSong = -1;
 	static MediaPlayer mp;
 	static boolean play;
@@ -19,14 +19,14 @@ public class PlayerState{
 	
 	static void prepare(ContentResolver cr)
 	{
-		nowPlaying = new ArrayList<MusicRetriever.Item>();
+		nowPlaying = new ArrayList<Item>();
 		music = new MusicRetriever(cr);
 		music.prepare();
 		play = false;
 		listener = new PlayerListener();
 	}
 	
-	static void addNowPlaying(MusicRetriever.Item song)
+	static void addNowPlaying(Item song)
 	{
 		nowPlaying.add(song);
 	}

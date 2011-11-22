@@ -14,7 +14,7 @@ import android.widget.ListView;
 public class AlbumSelection extends ExpandableListActivity {
 
 	ArrayList<String> albums;
-	ArrayList<ArrayList<MusicRetriever.Item>> songs;
+	ArrayList<ArrayList<Item>> songs;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
