@@ -2,6 +2,7 @@ package edu.cwru.eecs393;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.app.ExpandableListActivity;
 import android.content.Intent;
@@ -28,7 +29,13 @@ public class AlbumSelection extends ExpandableListActivity {
 		super.onCreate(savedInstanceState);
 
 		albums = MusicRetriever.getAlbums();
+		Collections.sort(albums);
 		songs = MusicRetriever.getGroupedSongs("album"); 
+		Collections.sort(songs,new Item.ItemAlbumComparator());
+		for (int x = 0; x < songs.size(); x++)
+		{
+			Collections.sort(songs.get(x), new Item.ItemComparator());
+		}
 		ExpandableListAdapter adapter = new ExpandableListAdapter(
 				this, 
 				albums,

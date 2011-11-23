@@ -1,5 +1,8 @@
 package edu.cwru.eecs393;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import android.content.ContentUris;
 import android.net.Uri;
 
@@ -42,4 +45,24 @@ public class Item {
         return ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
     }
+    
+    public static class ItemArtistComparator implements Comparator<ArrayList<Item>> {
+		public int compare(ArrayList<Item> item1, ArrayList<Item> item2) {
+			return item1.get(0).getArtist().compareTo(item2.get(0).getArtist());
+		}
+    }
+    
+    public static class ItemAlbumComparator implements Comparator<ArrayList<Item>> {
+		public int compare(ArrayList<Item> item1, ArrayList<Item> item2) {
+			return item1.get(0).getAlbum().compareTo(item2.get(0).getAlbum());
+		}
+    }
+    
+    public static class ItemComparator implements Comparator<Item> {
+		public int compare(Item item1, Item item2) {
+			return item1.getTitle().compareTo(item2.getTitle());
+		}
+    }
 }
+
+

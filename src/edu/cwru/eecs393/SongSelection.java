@@ -79,7 +79,6 @@ public class SongSelection extends ListActivity {
 		    ContextMenuInfo menuInfo) {
 		if(v == getListView())
 		{
-			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 			menu.setHeaderTitle("Actions");
 			menu.add(Menu.NONE,0,0, "Add to Queue");
 		}
