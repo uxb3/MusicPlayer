@@ -1,60 +1,63 @@
 package edu.cwru.eecs393;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.widget.Toast;
 
-public class Playlists extends SQLiteOpenHelper /*implements AsyncRestRequestListener<Methods, JSONObject>*/ {
+public class Playlists  /*implements AsyncRestRequestListener<Methods, JSONObject>*/ {
 	private static final int DATABASE_VERSION = 1;
     private static final String DB_NAME = "Playlists";
-/*    private static final String PLAYLISTS_TABLE =
-                "CREATE TABLE " + table_name + " (_id TEXT PRIMARY KEY, songPath TEXT);";*/
     private static SQLiteDatabase database = null;
-    private static Context context;
     
-    private SQLiteStatement insertStmt;
+    //private SQLiteStatement insertStmt;
+    private final Context context;	 
+    private PlaylistsHelper helper;
     
-    Playlists(Context context) {
-        super(context, DB_NAME, null, DATABASE_VERSION);
-        this.context = context;
-    }
+    private static class PlaylistsHelper extends SQLiteOpenHelper {
     
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-    	database = db;
-    }
-    
-    public void onCreate(SQLiteDatabase db, String playlist) {
+    	PlaylistsHelper(Context context) {
+            
+    		super(context, DB_NAME, null, DATABASE_VERSION);
+        }	
+    	@Override
+        public void onCreate(SQLiteDatabase db) {
+        	database = db;
+        }
     	
-    	database = db;
-    	database.execSQL("CREATE TABLE " + playlist + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, uri TEXT, name TEXT, album TEXT," +
-    			" artist TEXT);");
+    	@Override
+    	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+    		// TODO Auto-generated method stub
+    		
+    	}
+    	
+    	public void loadData() 
+    	{
+    		if (database == null)
+    			database = this.getWritableDatabase();	
+    	}
     }
     
-    public void onCreate(SQLiteDatabase db, String playlist, String id, String uri, String title, String album, String artist) {
+    public Playlists(Context c) {
     	
-    	database = db;
-    	database.execSQL("CREATE TABLE " + playlist + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, uri TEXT, title TEXT, album TEXT," +
-    			" artist TEXT);");
-    	
+    	this.context = c;
     }
-
-	@Override
-	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void loadData() 
-	{
-		if (database == null)
-			database = this.getWritableDatabase();	
-	}
+    
+    public Playlists open() throws SQLException {
+    	
+    	helper = new PlaylistsHelper(context);
+    	database = helper.getWritableDatabase();
+    	return this;
+    }
+    
+    public void close() {
+    	
+    	helper.close();
+    }
 	
 	public boolean createPlaylist(String playlist) {
 		
@@ -64,7 +67,7 @@ public class Playlists extends SQLiteOpenHelper /*implements AsyncRestRequestLis
      		" artist TEXT);");
 			return true;
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			
 			return false;
 		}
@@ -93,23 +96,33 @@ public class Playlists extends SQLiteOpenHelper /*implements AsyncRestRequestLis
 		return true;
 	}
 	
-	public void addSong(String playlist, String uri, String title, String album, String artist) {
+	public boolean addSong(String playlist, String uri, String title, String album, String artist) {
 		
 		ContentValues c = new ContentValues();
 		c.put("uri", uri);
 		c.put("title", title);
 		c.put("album", album);
 		c.put("artist", artist);
-		database.insert(playlist, null, c);
+		return (database.insert(playlist, null, c) > 0);
 	}
 	
-	public void deleteSong(String playlist, long id) {
+	public boolean deleteSong(String playlist, long id) {
 		
-		database.delete(playlist, "_id = " + id, null);
+		return (database.delete(playlist, "_id = " + id, null) > 0);
 	}
 	
 	public void deletePlaylist(String playlist) {
 		
 		database.execSQL("DROP TABLE "+ playlist + ";");
+	}
+	
+	public Cursor getPlaylists() {
+		
+		return database.rawQuery("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name;", null); 
+	}
+	
+	public Cursor getSongs(String playlist) {
+		
+		return database.rawQuery("SELECT * FROM " + playlist + ";", null);
 	}
 }
