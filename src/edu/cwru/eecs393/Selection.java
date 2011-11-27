@@ -34,6 +34,9 @@ public class Selection extends TabActivity {
         spec = tabHost.newTabSpec("songs").setIndicator("Songs").setContent(intent);
         tabHost.addTab(spec);
         
+        intent = new Intent().setClass(this, PlaylistsSelection.class);
+        spec = tabHost.newTabSpec("playlists").setIndicator("Playlists").setContent(intent);
+        
         //if(PlayerState.mp == null)
         //	PlayerState.mp = MediaPlayer.create(this, null);
         

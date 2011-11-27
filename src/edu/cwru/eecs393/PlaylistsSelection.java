@@ -1,7 +1,6 @@
 package edu.cwru.eecs393;
 
 import java.io.IOException;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,7 +18,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class SongSelection extends ListActivity {
+public class PlaylistsSelection  extends ListActivity  {
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -71,7 +70,7 @@ public class SongSelection extends ListActivity {
 		}
 		
 		//make call to start music player activity
-		startActivity(new Intent(SongSelection.this,Player.class));
+		startActivity(new Intent(PlaylistsSelection.this,Player.class));
 	}
 	
 	@Override
@@ -126,7 +125,7 @@ public class SongSelection extends ListActivity {
 				}
 			}
 		}
-		startActivity(new Intent(SongSelection.this,Player.class));
+		startActivity(new Intent(PlaylistsSelection.this,Player.class));
 		return true;
 	}
 }

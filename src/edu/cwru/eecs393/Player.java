@@ -74,6 +74,7 @@ public class Player extends Activity implements OnClickListener {
         if(PlayerState.currentSong != -1)
         {
         	queue += PlayerState.nowPlaying.get(PlayerState.currentSong).title;
+        	queue += "\n " + PlayerState.nowPlaying.get(PlayerState.currentSong).getURI();//.getPath();
         }
         txtQueue.setText(queue);
     }

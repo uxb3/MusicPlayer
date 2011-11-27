@@ -50,7 +50,7 @@ public class ArtistSelection extends ExpandableListActivity{
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
 	{
 		PlayerState.clearNowPlaying();
-		PlayerState.addNowPlaying(songs.get(groupPosition).get(childPosition));
+		PlayerState.addNowPlaying(songs.get(groupPosition));
 		PlayerState.currentSong = 0;
 		try {
 			if (PlayerState.mp == null)
@@ -58,7 +58,7 @@ public class ArtistSelection extends ExpandableListActivity{
 			else
 			{
 				PlayerState.mp.reset();
-				PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(0).getURI());	
+				PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(childPosition).getURI());	
 				PlayerState.mp.prepare();
 			}
 			PlayerState.play = true;

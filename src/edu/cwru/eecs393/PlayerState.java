@@ -26,8 +26,14 @@ public class PlayerState{
 		listener = new PlayerListener();
 	}
 	
-	static void addNowPlaying(Item song)
+	static void addNowPlaying(List<Item> songs)
 	{
+		for(int cnt = 0; cnt < songs.size(); cnt++)
+			nowPlaying.add(songs.get(cnt));
+	}
+	
+	static void addNowPlaying(Item song) {
+		
 		nowPlaying.add(song);
 	}
 	
