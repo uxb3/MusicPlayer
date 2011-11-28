@@ -23,7 +23,6 @@ public class PlaylistsSelection  extends ListActivity  {
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.);
 		Cursor mCursor = PlayerState.music.getSongsCursor();
 		startManagingCursor(mCursor);						//this will requery the MediaStore every time this activity is reloaded
 		
