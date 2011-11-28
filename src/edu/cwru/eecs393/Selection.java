@@ -29,18 +29,19 @@ public class Selection extends TabActivity {
         intent = new Intent().setClass(this, AlbumSelection.class);
         spec = tabHost.newTabSpec("albums").setIndicator("Albums").setContent(intent);
         tabHost.addTab(spec);
+
+        intent = new Intent().setClass(this, PlaylistsSelection.class);
+        spec = tabHost.newTabSpec("playlists").setIndicator("Playlists").setContent(intent);
+        tabHost.addTab(spec);
         
         intent = new Intent().setClass(this, SongSelection.class);
         spec = tabHost.newTabSpec("songs").setIndicator("Songs").setContent(intent);
         tabHost.addTab(spec);
         
-        intent = new Intent().setClass(this, PlaylistsSelection.class);
-        spec = tabHost.newTabSpec("playlists").setIndicator("Playlists").setContent(intent);
-        
         //if(PlayerState.mp == null)
         //	PlayerState.mp = MediaPlayer.create(this, null);
         
-        tabHost.setCurrentTab(2);
+        tabHost.setCurrentTab(3);
     }
 	
 }

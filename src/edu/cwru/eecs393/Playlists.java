@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
 
 /*
  * Note a song in this database is defined by 5 elements: _id, uri, title, album, and artist.
@@ -32,6 +31,8 @@ public class Playlists  /*implements AsyncRestRequestListener<Methods, JSONObjec
     	@Override
         public void onCreate(SQLiteDatabase db) {
         	database = db;
+        	database.execSQL("CREATE TABLE test (_id INTEGER PRIMARY KEY AUTOINCREMENT, uri TEXT, name TEXT, album TEXT," +
+             		" artist TEXT);");
         }
     	
     	@Override
@@ -156,7 +157,7 @@ public class Playlists  /*implements AsyncRestRequestListener<Methods, JSONObjec
 	 */
 	public Cursor getPlaylists() {
 		
-		return database.rawQuery("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name;", null); 
+		return database.rawQuery("SELECT name FROM sqlite_master WHERE type = 'table';", null); 
 	}
 	
 	/**

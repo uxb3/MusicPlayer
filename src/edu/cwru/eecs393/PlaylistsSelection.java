@@ -23,6 +23,7 @@ public class PlaylistsSelection  extends ListActivity  {
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		//setContentView(R.layout.);
 		Cursor mCursor = PlayerState.music.getSongsCursor();
 		startManagingCursor(mCursor);						//this will requery the MediaStore every time this activity is reloaded
 		
@@ -35,6 +36,20 @@ public class PlaylistsSelection  extends ListActivity  {
 		
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
+		/*playlists = new Playlists(this);
+		playlists.createPlaylist("test2");
+		playlists.createPlaylist("test3");
+		Cursor cursor = playlists.getPlaylists();
+		startManagingCursor(cursor);*/
+		/*ListAdapter adapter = new SimpleCursorAdapter(
+				this, 
+				R.layout.list_item,
+				cursor,
+				new String[] {"name"}, 
+				new int[] {R.id.textTitle});
+		
+		setListAdapter(adapter);
+		registerForContextMenu(getListView());*/
 	}
 	
 	protected void onListItemClick(ListView l, View v, int position, long id)
