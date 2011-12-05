@@ -21,13 +21,12 @@ public class PlayerState {
 	
 	static void changeSong()
 	{
-		if (seekThread != null)
+		if (seekThread == null)
 		{
-			seekThread.stop();
+			seekThread = new Thread(new seekT());
+			seekThread.start();
 		}
 		Player.seek.setMax(mp.getDuration());
-		seekThread = new Thread(new seekT());
-		seekThread.start();
 	}
 	
 	static void prepare(ContentResolver cr)
@@ -96,9 +95,9 @@ public class PlayerState {
 
 		public void run() {
 			while (mp != null
-                    && mp.getCurrentPosition() < mp.getDuration()) {
+                    && mp.getCurrentPosition() < mp.getDuration() ) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

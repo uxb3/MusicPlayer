@@ -16,6 +16,7 @@ public class MusicPlayer2Activity extends Activity {
         super.onCreate(savedInstanceState);
         
         // removes title bar on app, making image full screen
+        setRequestedOrientation(1);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         

@@ -45,6 +45,7 @@ public class ArtistSelection extends ExpandableListActivity{
 		
 		setListAdapter(adapter);
 		registerForContextMenu(getExpandableListView());
+		setRequestedOrientation(1);
 	}
 	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)

@@ -27,6 +27,7 @@ public class SongSelection extends ListActivity {
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(1);
 		//setContentView(R.layout.);
 		Cursor mCursor = PlayerState.music.getSongsCursor();
 		

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="wrap_content" 
+ android:layout_height="wrap_content"  >
+ 
+ <Button 
+	android:text="Now Playing" 
+	android:layout_width="fill_parent" 
+	android:id="@+id/btnNowPlaying" 
+	android:layout_height="wrap_content"
+	android:layout_alignParentBottom="true"/>
+	
+<TabHost 
+	android:layout_above="@id/btnNowPlaying"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -17,7 +30,10 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:padding="5dp" />
+        
+            
     </LinearLayout>
 </TabHost>
+</RelativeLayout>
