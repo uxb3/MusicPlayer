@@ -61,7 +61,6 @@ public class Player extends Activity implements OnClickListener {
         
         txtQueue = (TextView)this.findViewById(R.id.txtQueue);
         
-        
         if(PlayerState.mp.isPlaying())
         {
         	playing = true;
@@ -98,6 +97,19 @@ public class Player extends Activity implements OnClickListener {
         	//btnPlay.setEnabled(false);
         	//btnPause.setEnabled(false);
         	//btnStop.setEnabled(false);
+        }
+        
+        if (PlayerState.repeat == 0)
+        {
+        	btnRepeat.setBackgroundResource(R.drawable.repeat);
+        }
+        else if (PlayerState.repeat == 1)
+        {
+        	btnRepeat.setBackgroundResource(R.drawable.repeat_all);
+        }
+        else if (PlayerState.repeat == 2)
+        {
+        	btnRepeat.setBackgroundResource(R.drawable.repeat_one);
         }
         updateQueueText();
     }
@@ -137,7 +149,27 @@ public class Player extends Activity implements OnClickListener {
     }
 	public void onClick(View v) 
 	{
-		if (v.getId() == R.id.btnShuffle)
+		if (v.getId() == R.id.btnRepeat)
+		{
+			switch (PlayerState.repeat)
+			{
+				case 0:
+					PlayerState.repeat = 1;
+					btnRepeat.setBackgroundResource(R.drawable.repeat_all);
+					break;
+				case 1:
+					PlayerState.repeat = 2;
+					btnRepeat.setBackgroundResource(R.drawable.repeat_one);
+					break;
+				case 2:
+					PlayerState.repeat = 0;
+					btnRepeat.setBackgroundResource(R.drawable.repeat);
+					break;
+				default:
+					break;
+			}
+		}
+		else if (v.getId() == R.id.btnShuffle)
 		{
 			if (PlayerState.nowPlaying.size() > 1)
 			{
@@ -224,9 +256,35 @@ public class Player extends Activity implements OnClickListener {
 			//btnStop.setEnabled(true);
 			if(PlayerState.currentSong < PlayerState.nowPlaying.size()-1)
 			{
-				
 				try {
 					PlayerState.currentSong++;
+					PlayerState.mp.reset();
+					PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
+					PlayerState.mp.prepare();
+					PlayerState.mp.start();
+					updateQueueText();
+		        	playing = true;
+		        	btnPlay.setBackgroundResource(R.drawable.pause);
+					//btnPlay.setEnabled(false);
+					//btnPause.setEnabled(true);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+			else if(PlayerState.currentSong == PlayerState.nowPlaying.size()-1 && PlayerState.repeat == 1)
+			{
+				try {
+					PlayerState.currentSong = 0;
 					PlayerState.mp.reset();
 					PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 					PlayerState.mp.prepare();

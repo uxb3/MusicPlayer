@@ -13,14 +13,38 @@ public class PlayerListener implements OnCompletionListener {
 	}
 	
 	public void onCompletion(MediaPlayer mp) {
-		if(PlayerState.currentSong >= PlayerState.nowPlaying.size())
+		if(PlayerState.currentSong >= PlayerState.nowPlaying.size()-1 && PlayerState.repeat != 1)
 		{
 			mp.stop();
+		}
+		else if (PlayerState.currentSong >= PlayerState.nowPlaying.size()-1 && PlayerState.repeat == 1)
+		{
+			try {
+				PlayerState.currentSong = 0;
+				PlayerState.mp.reset();
+				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
+				PlayerState.mp.prepare();
+				PlayerState.mp.start();
+				Player.updateQueueText();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 		}
 		else
 		{			
 			try {
-				PlayerState.currentSong++;
+				if (PlayerState.repeat != 2)
+					PlayerState.currentSong++;
 				PlayerState.mp.reset();
 				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 				PlayerState.mp.prepare();
@@ -41,7 +65,6 @@ public class PlayerListener implements OnCompletionListener {
 			}	
 			
 		}
-		
 	}
 
 }

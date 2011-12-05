@@ -16,6 +16,7 @@ public class PlayerState {
 	static boolean play;
 	static Context context;
 	static PlayerListener listener;
+	static int repeat = 0;
 	
 	
 	static void prepare(ContentResolver cr)
