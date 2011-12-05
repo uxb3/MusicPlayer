@@ -41,13 +41,15 @@
 		        android:layout_height="50dp" 
 		    	android:id="@+id/btnShuffle" 
 		    	android:padding="30dp"
-		        android:background="@drawable/shuffle"/>
+		        android:background="@drawable/shuffle" 
+		        android:layout_gravity="center"/>
 	        
 	        <Button 
 		    	android:layout_width="50dp"
 		        android:layout_height="50dp" 
 		    	android:id="@+id/btnRepeat" 
 		    	android:padding="30dp"
+		    	android:layout_gravity="center"
 		        android:background="@drawable/repeat" />
 	        
 	        <Button 
@@ -55,6 +57,7 @@
 		        android:layout_height="50dp" 
 		    	android:id="@+id/btnJump" 
 		    	android:padding="30dp"
+		    	android:layout_gravity="center"
 		        android:background="@drawable/jump" />
 	        
 	        <Button 
@@ -62,6 +65,7 @@
 		        android:layout_height="50dp" 
 		    	android:id="@+id/btnPlus" 
 		    	android:padding="30dp"
+		    	android:layout_gravity="center"
 		        android:background="@drawable/add" />  
 		</LinearLayout>
 	</LinearLayout>
