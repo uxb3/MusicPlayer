@@ -51,7 +51,7 @@ public class ArtistSelection extends ExpandableListActivity{
 	{
 		PlayerState.clearNowPlaying();
 		PlayerState.addNowPlaying(songs.get(groupPosition));
-		PlayerState.currentSong = 0;
+		PlayerState.currentSong = childPosition;
 		try {
 			if (PlayerState.mp == null)
 				PlayerState.createMediaPlayer(getBaseContext());

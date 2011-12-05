@@ -5,9 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+/*
+ * This adapter can be used by activities to access the Playlists database.
+ * The database consists of two tables:
+ * Playlists (long _id AUTOINCREMENT, String name) & Items (long _id, foreign key (pid) references Playlists(_id), long mediaId)
+ */
+/*
+ * The sdk has a tool that allows you to run sql commands etc and browse the database
+ */
 public class PlaylistsAdapter {
 
+	private static final String TAG = "PlaylistsAdapter";
 	private PlaylistsHelper helper;
 	private SQLiteDatabase db;
 	private Context context;
@@ -19,14 +29,20 @@ public class PlaylistsAdapter {
 	
 	//ITEMS DATABASE FIELDS
 	private static final String ITEMS = "items";
+	private static final String KEY_PID = "pid";
+	private static final String KEY_SONGID = "songId";
 	
 	public PlaylistsAdapter(Context context) {
 		this.context = context;
 	}
 
 	public PlaylistsAdapter open() throws SQLException {
+		
+		Log.i(TAG, "In open()");
 		helper = new PlaylistsHelper(context);
+		Log.i(TAG, "Successfully created PlaylistsHelper.");
 		db = helper.getWritableDatabase();
+		Log.i(TAG, "Success");
 		return this;
 	}
 
@@ -34,19 +50,61 @@ public class PlaylistsAdapter {
 		helper.close();
 	}
 	
+	/*
+	 * Playlist table methods
+	 */
 	public boolean createPlaylist(String name) {
 		
 		return (db.insert(PLAYLISTS, null, playlistContent(name)) > 0);
 	}
 	
+	public boolean deletePlaylist(long id) {
+		
+		return (db.delete(PLAYLISTS, id + "=" + KEY_ID, null) > 0);
+	}
+	
+	public boolean deletePlaylist(String name) {
+		
+		return (db.delete(PLAYLISTS, name + "=" + KEY_NAME, null) > 0);
+	}
+	
+	public boolean deleteAllPlaylists() {
+		
+		return (db.delete(PLAYLISTS, null, null) > 0);
+	}
+	
+	public Cursor getPlaylistNames() throws SQLException {
+		
+		return db.query(PLAYLISTS, new String [] {KEY_NAME}, null, null, null, null, KEY_NAME);
+	}
+	
 	public Cursor getPlaylists() throws SQLException {
 		
-		return db.query(PLAYLISTS, new String [] {KEY_NAME}, null, null, null, null, null);
+		return db.query(PLAYLISTS, null, null, null, null, null, null);
 	}
 	
 	private ContentValues playlistContent(String name) {
+		
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, name);
+		return values;
+	}
+	
+	
+	/*
+	 * Item table methods
+	 */
+	
+	public boolean addSong(long pid, long songid) {
+		
+		return (db.insert(ITEMS, null, songContent(pid, songid)) > 0);
+	}
+	
+	private ContentValues songContent(long pid, long songid) {
+		
+		ContentValues values = new ContentValues();
+		values.put(KEY_PID, pid);
+		values.put(KEY_SONGID, songid);
 		return values;
 	}
 }

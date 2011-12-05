@@ -22,11 +22,15 @@ import android.widget.Toast;
 
 public class SongSelection extends ListActivity {
 
+	private static final String TAG = "ListActivity";
+
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.);
 		Cursor mCursor = PlayerState.music.getSongsCursor();
+		
+		// this method is deprecated, so this piece of code needs to be reimplemented
 		startManagingCursor(mCursor);						//this will requery the MediaStore every time this activity is reloaded
 		
 		ListAdapter adapter = new SimpleCursorAdapter(
@@ -44,7 +48,8 @@ public class SongSelection extends ListActivity {
 	{
 		PlayerState.clearNowPlaying();
 		PlayerState.addNowPlaying(MusicRetriever.mItems);
-		PlayerState.currentSong = 0;
+		Log.i(TAG, "The position is: " + position + PlayerState.nowPlaying.size());
+		PlayerState.currentSong = position;
 		try {
 			if (PlayerState.mp == null)
 				PlayerState.createMediaPlayer(getBaseContext());
@@ -82,7 +87,7 @@ public class SongSelection extends ListActivity {
 		{
 			menu.setHeaderTitle("Actions");
 			menu.add(Menu.NONE,0,0, "Add to Queue");
-			menu.add(Menu.NONE,0,1, "Add to Playlist");
+			menu.add(Menu.NONE,1,1, "Add to Playlist");
 		}
 	}
 	
@@ -126,8 +131,12 @@ public class SongSelection extends ListActivity {
 					e.printStackTrace();
 				}
 			}
+			startActivity(new Intent(SongSelection.this,Player.class));
 		}
-		startActivity(new Intent(SongSelection.this,Player.class));
+		else if(item.getItemId() == 1) {
+			
+			startActivity(new Intent(SongSelection.this, PlaylistsSelection.class));
+		}
 		return true;
 	}
 }

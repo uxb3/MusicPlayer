@@ -8,7 +8,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 
 
-public class PlayerState{
+public class PlayerState {
 	static MusicRetriever music;
 	static List<Item> nowPlaying;
 	static int currentSong = -1;
@@ -42,7 +42,7 @@ public class PlayerState{
 		context = cont;
 		if (PlayerState.mp == null)
 		{
-			PlayerState.mp = MediaPlayer.create(cont, PlayerState.nowPlaying.get(0).getURI());
+			PlayerState.mp = MediaPlayer.create(cont, PlayerState.nowPlaying.get(currentSong).getURI());
 			mp.setOnCompletionListener(listener);
 		}
 	}

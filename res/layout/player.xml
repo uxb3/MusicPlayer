@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    android:orientation="vertical">
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
     <TextView 
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
     	android:id="@+id/txtQueue">
-    </TextView>
-	
-	<LinearLayout 
-		android:layout_width="fill_parent" 
-		android:id="@+id/linearLayout1" 
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom" android:gravity="center_horizontal">
+    </TextView>
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:gravity="bottom|center_horizontal|center_vertical" >
 	    
 	    <Button 
-	    	android:layout_height="wrap_content" 
-	    	android:layout_width="wrap_content" 
+	    	android:layout_width="50dp"
+	        android:layout_height="50dp" 
 	    	android:id="@+id/btnPrev" 
-	    	android:padding="10dp"
+	    	android:padding="30dp"
 	        android:background="@drawable/prev" />
-	        
-	    <Button 
-	    	android:layout_height="wrap_content" 
-	    	android:layout_width="wrap_content" 
-	    	android:id="@+id/btnPlay" 
-	    	android:padding="10dp"
-	        android:background="@drawable/play" 
-	        />
+	        
+	    <Button
+	        android:id="@+id/btnPlay"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="@drawable/play"
+	        android:padding="30dp" />
 	
 	    <Button
 	        android:id="@+id/btnPause"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:background="@drawable/pause"/>
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="@drawable/pause"
+	        android:padding="30dp" />
 	        
-	    <Button
+	   <!--  <Button
 	        android:id="@+id/btnStop"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/stop"/>
+	        android:background="@drawable/stop"/> -->
 	        
 	    <Button 
-	    	android:layout_height="wrap_content" 
-	    	android:layout_width="wrap_content" 
+	    	android:layout_width="50dp"
+	        android:layout_height="50dp"
 	    	android:id="@+id/btnNext" 
-	    	android:padding="10dp"
+	    	android:padding="30dp"
 	        android:background="@drawable/next"/>
 	</LinearLayout>
 </LinearLayout>

@@ -15,17 +15,19 @@ import android.util.Log;
 
 public class Playlists   {
 	
-	// Database creation SQL statement
+		private static final String TAG = "Playlists";
 		private static final String DATABASE_CREATE_PLAYLISTS = "create table playlists "
 				+ "(_id integer primary key autoincrement, "
 				+ "name text not null);";
 		private static final String DATABASE_CREATE_ITEMS = "create table items "
 				+ "(_id integer primary key autoincrement, "
-				+ "foreign key(pid) references playlists(_id));";
+				+ "songId integer, pid integer, foreign key(pid) references playlists(_id));";
 
 		public static void onCreate(SQLiteDatabase database) {
+			Log.w(TAG, "attempting to create database table...");
 			database.execSQL(DATABASE_CREATE_PLAYLISTS);
-			//database.execSQL(DATABASE_CREATE_ITEMS);
+			database.execSQL(DATABASE_CREATE_ITEMS);
+			Log.w(TAG, "Done with that...");
 		}
 
 		public static void onUpgrade(SQLiteDatabase database, int oldVersion,

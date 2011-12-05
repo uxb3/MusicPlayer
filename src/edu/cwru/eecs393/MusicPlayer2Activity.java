@@ -7,7 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class MusicPlayer2Activity extends Activity {
-	protected static final long SPLASHTIME = 2500;
+	protected static final long SPLASHTIME = 100;
 	protected boolean active = true;
 	
     /** Called when the activity is first created. */
