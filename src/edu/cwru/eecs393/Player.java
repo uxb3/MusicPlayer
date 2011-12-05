@@ -13,16 +13,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 // Note you need to use BindService in order to do progress bar and update the activty look it up in Acitvty developer section
-public class Player extends Activity implements OnClickListener {
+public class Player extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	
 	Button btnPlay, btnPause, btnPrev, btnNext, btnShuffle, btnRepeat, btnJump;
 	static ImageView imgArt;
-	static TextView txtQueue;
+	static TextView txtQueue, txtStart, txtEnd;
 	String queue = "";
 	static MediaTime time;
+	static SeekBar seek;
 	boolean playing;
 	//Button btnStop;
     /** Called when the activity is first created. */
@@ -32,6 +35,9 @@ public class Player extends Activity implements OnClickListener {
         setContentView(R.layout.player);
         if(PlayerState.mp == null && PlayerState.nowPlaying.size() > 0)
         	PlayerState.createMediaPlayer(getBaseContext());
+        
+        seek = (SeekBar)this.findViewById(R.id.seekBar);
+        seek.setOnSeekBarChangeListener(this);
         
         btnPlay = (Button)this.findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
@@ -60,6 +66,8 @@ public class Player extends Activity implements OnClickListener {
         imgArt = (ImageView) this.findViewById(R.id.imgArt);
         
         txtQueue = (TextView)this.findViewById(R.id.txtQueue);
+        txtStart = (TextView)this.findViewById(R.id.txtTimeStart);
+        txtEnd = (TextView)this.findViewById(R.id.txtTimeEnd);
         
         if(PlayerState.mp.isPlaying())
         {
@@ -71,6 +79,7 @@ public class Player extends Activity implements OnClickListener {
 				// TODO Auto-generated catch block
 				imgArt.setImageResource(R.drawable.icon);
 			}
+        	PlayerState.changeSong();
         	//btnPlay.setEnabled(false);
         	//btnPause.setEnabled(true);
         	//btnStop.setEnabled(true);
@@ -93,7 +102,8 @@ public class Player extends Activity implements OnClickListener {
         else
         {
         	playing = true;
-        	btnPlay.setBackgroundResource(R.drawable.play);
+        	btnPlay.setBackgroundResource(R.drawable.pause);
+        	PlayerState.changeSong();
         	//btnPlay.setEnabled(false);
         	//btnPause.setEnabled(false);
         	//btnStop.setEnabled(false);
@@ -191,6 +201,7 @@ public class Player extends Activity implements OnClickListener {
 					updateQueueText();
 		        	playing = true;
 		        	btnPlay.setBackgroundResource(R.drawable.pause);
+		        	PlayerState.changeSong();
 					//btnPlay.setEnabled(false);
 					//btnPause.setEnabled(true);
 				} catch (IllegalArgumentException e) {
@@ -215,6 +226,7 @@ public class Player extends Activity implements OnClickListener {
 				PlayerState.play = true;
 	        	playing = true;
 	        	btnPlay.setBackgroundResource(R.drawable.pause);
+	        	PlayerState.changeSong();
 				//btnPause.setEnabled(true);
 				//btnPlay.setEnabled(false);
 				//btnStop.setEnabled(true);
@@ -265,6 +277,7 @@ public class Player extends Activity implements OnClickListener {
 					updateQueueText();
 		        	playing = true;
 		        	btnPlay.setBackgroundResource(R.drawable.pause);
+		        	PlayerState.changeSong();
 					//btnPlay.setEnabled(false);
 					//btnPause.setEnabled(true);
 				} catch (IllegalArgumentException e) {
@@ -292,6 +305,7 @@ public class Player extends Activity implements OnClickListener {
 					updateQueueText();
 		        	playing = true;
 		        	btnPlay.setBackgroundResource(R.drawable.pause);
+		        	PlayerState.changeSong();
 					//btnPlay.setEnabled(false);
 					//btnPause.setEnabled(true);
 				} catch (IllegalArgumentException e) {
@@ -335,6 +349,7 @@ public class Player extends Activity implements OnClickListener {
 					PlayerState.mp.prepare();
 					PlayerState.mp.start();
 					updateQueueText();
+					PlayerState.changeSong();
 		        	playing = true;
 		        	btnPlay.setBackgroundResource(R.drawable.pause);
 					//btnPlay.setEnabled(false);
@@ -362,6 +377,7 @@ public class Player extends Activity implements OnClickListener {
 					PlayerState.mp.prepare();
 					PlayerState.mp.start();
 					updateQueueText();
+					PlayerState.changeSong();
 		        	playing = true;
 		        	btnPlay.setBackgroundResource(R.drawable.pause);
 					//btnPlay.setEnabled(false);
@@ -381,5 +397,27 @@ public class Player extends Activity implements OnClickListener {
 				}	
 			}
 		}
+	}
+
+	public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+		if (fromUser) {
+            PlayerState.mp.seekTo(progress);
+            seek.setProgress(progress);
+        }
+		MediaTime current = new MediaTime(PlayerState.mp.getCurrentPosition());
+		MediaTime remaining = new MediaTime(PlayerState.mp.getDuration()-PlayerState.mp.getCurrentPosition());
+		txtStart.setText(current.getTime());
+		txtEnd.setText(remaining.getTime());
+	}
+
+	public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
 	}
 }

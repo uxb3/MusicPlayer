@@ -17,7 +17,18 @@ public class PlayerState {
 	static Context context;
 	static PlayerListener listener;
 	static int repeat = 0;
+	static Thread seekThread;
 	
+	static void changeSong()
+	{
+		if (seekThread != null)
+		{
+			seekThread.stop();
+		}
+		Player.seek.setMax(mp.getDuration());
+		seekThread = new Thread(new seekT());
+		seekThread.start();
+	}
 	
 	static void prepare(ContentResolver cr)
 	{
@@ -78,5 +89,25 @@ public class PlayerState {
 		{
 			currentSong--;
 		}
+	}
+	
+	private static class seekT implements Runnable
+	{
+
+		public void run() {
+			while (mp != null
+                    && mp.getCurrentPosition() < mp.getDuration()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                Player.seek.setProgress(mp.getCurrentPosition());
+            }
+
+			
+		}
+		
 	}
 }
