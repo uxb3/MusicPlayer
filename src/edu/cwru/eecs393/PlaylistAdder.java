@@ -2,6 +2,7 @@ package edu.cwru.eecs393;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -78,6 +79,10 @@ public class PlaylistAdder extends Activity implements OnItemClickListener, OnCl
 			Toast toast = Toast.makeText(this, "Song added", Toast.LENGTH_SHORT);
 			toast.show();
 		}
+		else {
+			Toast toast = Toast.makeText(this, "Song is already in the playlist.", Toast.LENGTH_SHORT);
+			toast.show();
+		}
 		
 	}
 
@@ -91,6 +96,8 @@ public class PlaylistAdder extends Activity implements OnItemClickListener, OnCl
 
 	public void onClick(View v) {
 		
+		playlists.close();
 		finish();
+		startActivity(new Intent(PlaylistAdder.this, PlaylistsSelection.class));
 	}
 }

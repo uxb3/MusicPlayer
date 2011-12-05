@@ -30,7 +30,7 @@ public class PlaylistsAdapter {
 	//ITEMS DATABASE FIELDS
 	private static final String ITEMS = "items";
 	private static final String KEY_PID = "pid";
-	private static final String KEY_SONGID = "songid";
+	private static final String KEY_SONGID = "songId";
 	
 	public PlaylistsAdapter(Context context) {
 		this.context = context;
@@ -95,15 +95,17 @@ public class PlaylistsAdapter {
 		
 		/*
 		 * Get rid of this if statement when you implement exists array in PlaylistAdder
+		 * pid + "=" + KEY_PID + " & " + songid + "=" + KEY_SONGID
 		 */
 		Log.i(TAG, "checking to see if the particular playlist contains this song");
-		int size = db.query(ITEMS, null, pid + "=" + KEY_PID + " & " + songid + "=" + KEY_SONGID, null, null, null, null).getCount();
-		Log.i(TAG, "size = " + size);
-		if(size == 0) {
-			return (db.insert(ITEMS, null, songContent(pid, songid)) > 0);
+		Cursor p = db.query(ITEMS, null, KEY_PID + "=" + pid, null, null, null, null);
+		int index = p.getColumnIndex(KEY_SONGID);
+		while(p.moveToNext()) {
+			
+			if(p.getLong(index) == songid)
+				return false;
 		}
-		else
-			return false;
+		return (db.insert(ITEMS, null, songContent(pid, songid)) > 0);
 	}
 	
 	public boolean deleteSong(long pid, long songid) {

@@ -126,7 +126,9 @@ public class PlaylistsSelection extends ListActivity {
 		}
 		else if(item.getItemId() == 1) {
 			
+			playlists.close();
 			PlaylistState.pid = pids[playlistIndex];
+			finish();
 			startActivity(new Intent(PlaylistsSelection.this, PlaylistAdder.class));
 		}
 		return true;
