@@ -17,18 +17,28 @@ public final class R {
         public static final int white=0x7f040000;
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
-        public static final int next=0x7f020001;
-        public static final int next_focus=0x7f020002;
-        public static final int pause=0x7f020003;
-        public static final int pause_focus=0x7f020004;
-        public static final int play=0x7f020005;
-        public static final int play_focus=0x7f020006;
-        public static final int prev=0x7f020007;
-        public static final int prev_focus=0x7f020008;
-        public static final int splash_img=0x7f020009;
-        public static final int stop=0x7f02000a;
-        public static final int stop_focus=0x7f02000b;
+        public static final int add=0x7f020000;
+        public static final int add_focus=0x7f020001;
+        public static final int icon=0x7f020002;
+        public static final int icon_small=0x7f020003;
+        public static final int jump=0x7f020004;
+        public static final int jump_focus=0x7f020005;
+        public static final int next=0x7f020006;
+        public static final int next_focus=0x7f020007;
+        public static final int pause=0x7f020008;
+        public static final int pause_focus=0x7f020009;
+        public static final int play=0x7f02000a;
+        public static final int play_focus=0x7f02000b;
+        public static final int prev=0x7f02000c;
+        public static final int prev_focus=0x7f02000d;
+        public static final int repeat=0x7f02000e;
+        public static final int repeat_all=0x7f02000f;
+        public static final int repeat_one=0x7f020010;
+        public static final int shuffle=0x7f020011;
+        public static final int shuffle_select=0x7f020012;
+        public static final int splash_img=0x7f020013;
+        public static final int stop=0x7f020014;
+        public static final int stop_focus=0x7f020015;
     }
     public static final class id {
         public static final int btnJump=0x7f06000c;
