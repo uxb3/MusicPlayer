@@ -17,6 +17,7 @@ public class PlayerState {
 	static Context context;
 	static PlayerListener listener;
 	
+	
 	static void prepare(ContentResolver cr)
 	{
 		nowPlaying = new ArrayList<Item>();
@@ -51,6 +52,22 @@ public class PlayerState {
 	{
 		nowPlaying.clear();
 		currentSong = -1;
+	}
+	
+	static void shuffle()
+	{
+		List<Item> shuffled = new ArrayList<Item>();
+		shuffled.add(nowPlaying.get(currentSong));
+		nowPlaying.remove(currentSong);
+		
+		while(nowPlaying.size() > 0)
+		{
+			int random = (int) (Math.random()*nowPlaying.size());
+			shuffled.add(nowPlaying.get(random));
+			nowPlaying.remove(random);
+		}
+		currentSong = 0;
+		nowPlaying = shuffled;
 	}
 	
 	static void removeNowPlaying(int index)

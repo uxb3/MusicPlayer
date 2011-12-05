@@ -18,7 +18,7 @@ import android.widget.TextView;
 // Note you need to use BindService in order to do progress bar and update the activty look it up in Acitvty developer section
 public class Player extends Activity implements OnClickListener {
 	
-	Button btnPlay, btnPause, btnPrev, btnNext;
+	Button btnPlay, btnPause, btnPrev, btnNext, btnShuffle, btnRepeat, btnJump;
 	static ImageView imgArt;
 	static TextView txtQueue;
 	String queue = "";
@@ -47,6 +47,15 @@ public class Player extends Activity implements OnClickListener {
         
         btnNext = (Button) this.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
+        
+        btnShuffle = (Button)this.findViewById(R.id.btnShuffle);
+        btnShuffle.setOnClickListener(this);
+        
+        btnRepeat = (Button)this.findViewById(R.id.btnRepeat);
+        btnRepeat.setOnClickListener(this);
+        
+        btnJump = (Button)this.findViewById(R.id.btnJump);
+        btnJump.setOnClickListener(this);
         
         imgArt = (ImageView) this.findViewById(R.id.imgArt);
         
@@ -128,7 +137,46 @@ public class Player extends Activity implements OnClickListener {
     }
 	public void onClick(View v) 
 	{
-		if (v.getId() == R.id.btnPlay && playing == false)
+		if (v.getId() == R.id.btnShuffle)
+		{
+			if (PlayerState.nowPlaying.size() > 1)
+			{
+				PlayerState.shuffle();
+				updateQueueText();
+			}
+		}
+		else if (v.getId() == R.id.btnJump)
+		{
+			if (PlayerState.nowPlaying.size() > 0)
+			{
+				try {
+					int random = (int) (Math.random()*PlayerState.nowPlaying.size());
+					PlayerState.currentSong = random;
+					PlayerState.mp.reset();
+					PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
+					PlayerState.mp.prepare();
+					PlayerState.mp.start();
+					updateQueueText();
+		        	playing = true;
+		        	btnPlay.setBackgroundResource(R.drawable.pause);
+					//btnPlay.setEnabled(false);
+					//btnPause.setEnabled(true);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+		}
+		else if (v.getId() == R.id.btnPlay && playing == false)
 		{
 			if(PlayerState.nowPlaying.size()>0)
 			{
