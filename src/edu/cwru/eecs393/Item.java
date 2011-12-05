@@ -12,13 +12,15 @@ public class Item {
     String title;
     String album;
     long duration;
+    long albumid;
 
-    public Item(long id, String artist, String title, String album, long duration) {
+    public Item(long id, String artist, String title, String album, long duration, long albumid) {
         this.id = id;
         this.artist = artist;
         this.title = title;
         this.album = album;
         this.duration = duration;
+        this.albumid = albumid;
     }
 
     public long getId() {

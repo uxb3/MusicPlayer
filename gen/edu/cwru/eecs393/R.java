@@ -31,23 +31,27 @@ public final class R {
         public static final int stop_focus=0x7f02000b;
     }
     public static final class id {
-        public static final int btnNext=0x7f060010;
-        public static final int btnPlay=0x7f06000f;
-        public static final int btnPrev=0x7f06000a;
+        public static final int btnJump=0x7f06000c;
+        public static final int btnNext=0x7f060014;
+        public static final int btnPlay=0x7f060013;
+        public static final int btnPlus=0x7f06000d;
+        public static final int btnPrev=0x7f060012;
+        public static final int btnRepeat=0x7f06000b;
+        public static final int btnShuffle=0x7f06000a;
         public static final int button1=0x7f060003;
         public static final int editText1=0x7f060002;
-        public static final int imageView1=0x7f060009;
-        public static final int linearLayout1=0x7f06000b;
+        public static final int imgArt=0x7f060009;
+        public static final int linearLayout1=0x7f06000e;
         public static final int list=0x7f060001;
-        public static final int progressBar1=0x7f06000e;
+        public static final int progressBar1=0x7f060011;
         public static final int seekBar1=0x7f060008;
         public static final int splash=0x7f060006;
         public static final int testbutton=0x7f060000;
         public static final int textArtist=0x7f060005;
         public static final int textTitle=0x7f060004;
         public static final int txtQueue=0x7f060007;
-        public static final int txtTimeEnd=0x7f06000d;
-        public static final int txtTimeStart=0x7f06000c;
+        public static final int txtTimeEnd=0x7f060010;
+        public static final int txtTimeStart=0x7f06000f;
     }
     public static final class layout {
         public static final int add_songs=0x7f030000;

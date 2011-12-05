@@ -25,6 +25,7 @@ public class PlayerListener implements OnCompletionListener {
 				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 				PlayerState.mp.prepare();
 				PlayerState.mp.start();
+				Player.updateQueueText();
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

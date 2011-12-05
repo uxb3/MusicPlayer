@@ -1,5 +1,6 @@
 package edu.cwru.eecs393;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.app.Activity;
@@ -11,15 +12,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 // Note you need to use BindService in order to do progress bar and update the activty look it up in Acitvty developer section
 public class Player extends Activity implements OnClickListener {
 	
 	Button btnPlay, btnPause, btnPrev, btnNext;
-	TextView txtQueue;
+	static ImageView imgArt;
+	static TextView txtQueue;
 	String queue = "";
-	MediaTime time;
+	static MediaTime time;
 	boolean playing;
 	//Button btnStop;
     /** Called when the activity is first created. */
@@ -45,6 +48,8 @@ public class Player extends Activity implements OnClickListener {
         btnNext = (Button) this.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(this);
         
+        imgArt = (ImageView) this.findViewById(R.id.imgArt);
+        
         txtQueue = (TextView)this.findViewById(R.id.txtQueue);
         
         
@@ -52,6 +57,12 @@ public class Player extends Activity implements OnClickListener {
         {
         	playing = true;
         	btnPlay.setBackgroundResource(R.drawable.pause);
+        	try {
+				imgArt.setImageBitmap(MusicRetriever.getAlbumArt(PlayerState.nowPlaying.get(PlayerState.currentSong)));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				imgArt.setImageResource(R.drawable.icon);
+			}
         	//btnPlay.setEnabled(false);
         	//btnPause.setEnabled(true);
         	//btnStop.setEnabled(true);
@@ -61,6 +72,12 @@ public class Player extends Activity implements OnClickListener {
         {
         	playing = false;
         	btnPlay.setBackgroundResource(R.drawable.play);
+        	try {
+				imgArt.setImageBitmap(MusicRetriever.getAlbumArt(PlayerState.nowPlaying.get(PlayerState.currentSong)));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				imgArt.setImageResource(R.drawable.icon);
+			}
         	//btnPlay.setEnabled(true);
         	//btnPause.setEnabled(false);
         	//btnStop.setEnabled(false);
@@ -76,7 +93,7 @@ public class Player extends Activity implements OnClickListener {
         updateQueueText();
     }
 
-    private void updateQueueText()
+    public static void updateQueueText()
     {
     	time = new MediaTime(PlayerState.mp.getDuration());
     	String queue = "Queue:\n";
@@ -85,7 +102,7 @@ public class Player extends Activity implements OnClickListener {
     		x = PlayerState.currentSong-1;
     	else
     		x = 0;
-        for (x = x; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 10); x++)
+        for (x = x; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 9); x++)
         {
         	if(x == PlayerState.currentSong)
         		queue += ">>";
@@ -101,6 +118,13 @@ public class Player extends Activity implements OnClickListener {
         
         String currTime =  "\n" + time.getTime();
         txtQueue.setText(queue + currTime);
+        
+        try {
+			imgArt.setImageBitmap(MusicRetriever.getAlbumArt(PlayerState.nowPlaying.get(PlayerState.currentSong)));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			imgArt.setImageResource(R.drawable.icon);
+		}
     }
 	public void onClick(View v) 
 	{
