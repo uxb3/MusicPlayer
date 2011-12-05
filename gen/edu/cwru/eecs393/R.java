@@ -43,6 +43,7 @@ public final class R {
     public static final class id {
         public static final int btnJump=0x7f06000b;
         public static final int btnNext=0x7f060013;
+        public static final int btnNowPlaying=0x7f060014;
         public static final int btnPlay=0x7f060012;
         public static final int btnPlus=0x7f06000c;
         public static final int btnPrev=0x7f060011;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+import java.util.ArrayList;
 
 public class PlaylistAdder extends Activity implements OnItemClickListener, OnClickListener {
 
@@ -34,7 +36,11 @@ public class PlaylistAdder extends Activity implements OnItemClickListener, OnCl
 		Button submit = (Button) findViewById(R.id.testbutton);
 		submit.setOnClickListener(this);
 		Cursor cursor = PlayerState.music.getSongsCursor();
-		startManagingCursor(cursor);
+		//Cursor psongs = playlists.getSongs(PlaylistState.pid);
+		//ArrayList<Long> sps = new ArrayList<Long>();
+		//int index = psongs.getColumnIndex(PlaylistState.KEY_SONGID);
+		//while(cursor.moveToNext())
+			//sps.add(cursor.getLong(index));
 		String [] names = null;
 		String [] artists = null;
 		boolean [] exists = null;
@@ -42,8 +48,8 @@ public class PlaylistAdder extends Activity implements OnItemClickListener, OnCl
 
 			names = new String [cursor.getCount()];
 			artists = new String [cursor.getCount()];
-			exists = new  boolean [cursor.getCount()];
 			songIds = new long [cursor.getCount()];
+			exists = new  boolean [cursor.getCount()];
 
 			int in = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
 			int ia = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
@@ -55,15 +61,29 @@ public class PlaylistAdder extends Activity implements OnItemClickListener, OnCl
 				artists[cnt] = cursor.getString(ia);
 				songIds[cnt] = cursor.getLong(is);
 				// Add Code for checking if song exists
+				/*for(int i = 0; i < sps.size(); i++) {
+					
+					if(songIds[cnt] == sps.get(i)) {
+						
+						exists[cnt] = true;
+						sps.remove(i);
+					}
+				}*/
 				cnt++;
 			}
 		}
-		ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		Log.i(TAG, "Attempting to add songs");
 		if(names != null) {
 			for(int cnt = 0; cnt < names.length; cnt++) {
 
+				Log.i(TAG, names[cnt]);
 				adapter.add(names[cnt]);
+				/*if(exists[cnt] == true) {
+					
+					adapter.getView(cnt, null, null).setBackgroundColor(Color.GRAY);
+					adapter.getItemViewType(cnt);
+				}*/
 				//add code to change color
 			}
 		}

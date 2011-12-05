@@ -21,11 +21,12 @@ public class PlayerListener implements OnCompletionListener {
 		{
 			try {
 				PlayerState.currentSong = 0;
-				PlayerState.mp.reset();
+				//PlayerState.mp.reset();
 				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 				PlayerState.mp.prepare();
 				PlayerState.mp.start();
 				Player.updateQueueText();
+				PlayerState.changeSong();
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -45,11 +46,12 @@ public class PlayerListener implements OnCompletionListener {
 			try {
 				if (PlayerState.repeat != 2)
 					PlayerState.currentSong++;
-				PlayerState.mp.reset();
+				//PlayerState.mp.reset();
 				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 				PlayerState.mp.prepare();
 				PlayerState.mp.start();
 				Player.updateQueueText();
+				PlayerState.changeSong();
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
