@@ -6,9 +6,10 @@
     android:orientation="vertical" >
 
     <TextView 
-    	android:layout_width="wrap_content" 
+    	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
-    	android:id="@+id/txtQueue"/>
+    	android:id="@+id/txtQueue"
+    	android:text="testsfgsdfgsfdgsgdfglsjflkgsfgksbotigshu gvshldiugvshlgi     uhdrlgkjghsvshiurhseriuvgsvhdrigudf"/>
     
     <SeekBar 
     	android:layout_height="wrap_content" 

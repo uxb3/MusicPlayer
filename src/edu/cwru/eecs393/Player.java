@@ -102,7 +102,7 @@ public class Player extends Activity implements OnClickListener {
     		x = PlayerState.currentSong-1;
     	else
     		x = 0;
-        for (x = x; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 9); x++)
+        for (x = x; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 2); x++)
         {
         	if(x == PlayerState.currentSong)
         		queue += ">>";
