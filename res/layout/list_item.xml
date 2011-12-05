@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:text="TextView"
         android:textAppearance="?android:attr/textAppearanceLarge" >
     </TextView>
 

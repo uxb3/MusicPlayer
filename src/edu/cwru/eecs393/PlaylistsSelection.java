@@ -88,6 +88,11 @@ public class PlaylistsSelection extends ListActivity {
 			finish();
 			startActivity(new Intent(PlaylistsSelection.this, PlaylistCreation.class));
 		}
+		else {
+			
+			PlaylistState.pid = pids[position];
+			startActivity(new Intent(PlaylistsSelection.this, ViewPlaylist.class));
+		}
 		
 		Log.i(TAG, "Click");
 	}
@@ -107,20 +112,22 @@ public class PlaylistsSelection extends ListActivity {
 	public boolean onContextItemSelected(MenuItem item)
 	{
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+		int playlistIndex = info.position;
 		if(item.getItemId() == 0)
 		{
-			int playlistIndex = info.position;
 			if(playlists.deletePlaylist(pids[playlistIndex]))
 				Log.i(TAG, "Deleted the playlist.");
 			else
 				Log.i(TAG, "Failed to delete playlist.");
+			playlists.close();
 			finish();
 			startActivity(new Intent(PlaylistsSelection.this, PlaylistsSelection.class));
 			
 		}
 		else if(item.getItemId() == 1) {
 			
-			//startActivity(new Intent(PlaylistsSelection.this, PlaylistAdder.class));
+			PlaylistState.pid = pids[playlistIndex];
+			startActivity(new Intent(PlaylistsSelection.this, PlaylistAdder.class));
 		}
 		return true;
 	}
