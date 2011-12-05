@@ -8,8 +8,7 @@
     <TextView 
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
-    	android:id="@+id/txtQueue"
-    	android:text="testsfgsdfgsfdgsgdfglsjflkgsfgksbotigshu gvshldiugvshlgi     uhdrlgkjghsvshiurhseriuvgsvhdrigudf"/>
+    	android:id="@+id/txtQueue"/>
     
     <SeekBar 
     	android:layout_height="wrap_content" 

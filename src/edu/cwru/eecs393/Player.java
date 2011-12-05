@@ -328,9 +328,35 @@ public class Player extends Activity implements OnClickListener {
 			}
 			else if(PlayerState.currentSong > 0)
 			{
-				
 				try {
 					PlayerState.currentSong--;
+					PlayerState.mp.reset();
+					PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
+					PlayerState.mp.prepare();
+					PlayerState.mp.start();
+					updateQueueText();
+		        	playing = true;
+		        	btnPlay.setBackgroundResource(R.drawable.pause);
+					//btnPlay.setEnabled(false);
+					//btnPause.setEnabled(true);
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			}
+			else if (PlayerState.currentSong == 0 && PlayerState.repeat == 1)
+			{
+				try {
+					PlayerState.currentSong = PlayerState.nowPlaying.size()-1;
 					PlayerState.mp.reset();
 					PlayerState.mp.setDataSource(getBaseContext(), PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 					PlayerState.mp.prepare();
