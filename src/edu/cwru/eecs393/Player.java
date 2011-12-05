@@ -20,6 +20,7 @@ public class Player extends Activity implements OnClickListener {
 	TextView txtQueue;
 	String queue = "";
 	MediaTime time;
+	boolean playing;
 	//Button btnStop;
     /** Called when the activity is first created. */
     @Override
@@ -32,8 +33,8 @@ public class Player extends Activity implements OnClickListener {
         btnPlay = (Button)this.findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
         
-        btnPause = (Button)this.findViewById(R.id.btnPause);
-        btnPause.setOnClickListener(this);
+        //btnPause = (Button)this.findViewById(R.id.btnPause);
+        //btnPause.setOnClickListener(this);
         
         //btnStop = (Button)this.findViewById(R.id.btnStop);
         //btnStop.setOnClickListener(this);
@@ -46,23 +47,30 @@ public class Player extends Activity implements OnClickListener {
         
         txtQueue = (TextView)this.findViewById(R.id.txtQueue);
         
+        
         if(PlayerState.mp.isPlaying())
         {
-        	btnPlay.setEnabled(false);
-        	btnPause.setEnabled(true);
+        	playing = true;
+        	btnPlay.setBackgroundResource(R.drawable.pause);
+        	//btnPlay.setEnabled(false);
+        	//btnPause.setEnabled(true);
         	//btnStop.setEnabled(true);
         	
         }
         else if(PlayerState.nowPlaying.size() > 0)
         {
-        	btnPlay.setEnabled(true);
-        	btnPause.setEnabled(false);
+        	playing = false;
+        	btnPlay.setBackgroundResource(R.drawable.play);
+        	//btnPlay.setEnabled(true);
+        	//btnPause.setEnabled(false);
         	//btnStop.setEnabled(false);
         }
         else
         {
-        	btnPlay.setEnabled(false);
-        	btnPause.setEnabled(false);
+        	playing = true;
+        	btnPlay.setBackgroundResource(R.drawable.play);
+        	//btnPlay.setEnabled(false);
+        	//btnPause.setEnabled(false);
         	//btnStop.setEnabled(false);
         }
         updateQueueText();
@@ -96,24 +104,28 @@ public class Player extends Activity implements OnClickListener {
     }
 	public void onClick(View v) 
 	{
-		if (v.getId() == R.id.btnPlay)
+		if (v.getId() == R.id.btnPlay && playing == false)
 		{
 			if(PlayerState.nowPlaying.size()>0)
 			{
 				PlayerState.play = true;
-				btnPause.setEnabled(true);
-				btnPlay.setEnabled(false);
+	        	playing = true;
+	        	btnPlay.setBackgroundResource(R.drawable.pause);
+				//btnPause.setEnabled(true);
+				//btnPlay.setEnabled(false);
 				//btnStop.setEnabled(true);
 				PlayerState.mp.start();
 			}
 		}
-		else if (v.getId() == R.id.btnPause)
+		else if (v.getId() == R.id.btnPlay && playing == true)
 		{
 			if(PlayerState.mp.isPlaying())
 			{
 				PlayerState.mp.pause();
-				btnPlay.setEnabled(true);
-				btnPause.setEnabled(false);
+	        	playing = false;
+	        	btnPlay.setBackgroundResource(R.drawable.play);
+				//btnPlay.setEnabled(true);
+				//btnPause.setEnabled(false);
 				//btnStop.setEnabled(true);
 			}
 		}
@@ -133,8 +145,10 @@ public class Player extends Activity implements OnClickListener {
 		else if (v.getId() == R.id.btnNext)
 		{
 			PlayerState.mp.pause();
-			btnPlay.setEnabled(true);
-			btnPause.setEnabled(false);
+        	playing = false;
+        	btnPlay.setBackgroundResource(R.drawable.play);
+			//btnPlay.setEnabled(true);
+			//btnPause.setEnabled(false);
 			//btnStop.setEnabled(true);
 			if(PlayerState.currentSong < PlayerState.nowPlaying.size()-1)
 			{
@@ -146,8 +160,10 @@ public class Player extends Activity implements OnClickListener {
 					PlayerState.mp.prepare();
 					PlayerState.mp.start();
 					updateQueueText();
-					btnPlay.setEnabled(false);
-					btnPause.setEnabled(true);
+		        	playing = true;
+		        	btnPlay.setBackgroundResource(R.drawable.pause);
+					//btnPlay.setEnabled(false);
+					//btnPause.setEnabled(true);
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -166,8 +182,10 @@ public class Player extends Activity implements OnClickListener {
 		else if (v.getId() == R.id.btnPrev)
 		{
 			PlayerState.mp.pause();
-			btnPlay.setEnabled(true);
-			btnPause.setEnabled(false);
+        	playing = false;
+        	btnPlay.setBackgroundResource(R.drawable.play);
+			//btnPlay.setEnabled(true);
+			//btnPause.setEnabled(false);
 			//btnStop.setEnabled(true);
 			/*
 			 * if we are after the 5 second mark we want to go to the beginning of this song
@@ -188,8 +206,10 @@ public class Player extends Activity implements OnClickListener {
 					PlayerState.mp.prepare();
 					PlayerState.mp.start();
 					updateQueueText();
-					btnPlay.setEnabled(false);
-					btnPause.setEnabled(true);
+		        	playing = true;
+		        	btnPlay.setBackgroundResource(R.drawable.pause);
+					//btnPlay.setEnabled(false);
+					//btnPause.setEnabled(true);
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

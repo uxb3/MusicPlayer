@@ -1,1 +1,8 @@
-<ImageView android:id="@+id/splash" xmlns:android="http://schemas.android.com/apk/res/android" android:src="@drawable/splash_img" android:background="@color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"></ImageView>
+<ImageView 
+	android:id="@+id/splash" 
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:src="@drawable/splash_img" 
+	android:background="@color/black" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent">
+</ImageView>

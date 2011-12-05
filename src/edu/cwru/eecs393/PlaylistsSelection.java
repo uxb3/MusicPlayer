@@ -120,7 +120,7 @@ public class PlaylistsSelection extends ListActivity {
 		}
 		else if(item.getItemId() == 1) {
 			
-			startActivity(new Intent(PlaylistsSelection.this, PlaylistAdder.class));
+			//startActivity(new Intent(PlaylistsSelection.this, PlaylistAdder.class));
 		}
 		return true;
 	}
