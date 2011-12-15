@@ -6,4 +6,5 @@
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
     <string name="submit">Submit</string>
+    <string name="done">done</string>
 </resources>

@@ -27,7 +27,7 @@ public class AlbumSelection extends ExpandableListActivity {
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
+		setRequestedOrientation(1);
 		albums = MusicRetriever.getAlbums();
 		Collections.sort(albums);
 		songs = MusicRetriever.getGroupedSongs("album"); 

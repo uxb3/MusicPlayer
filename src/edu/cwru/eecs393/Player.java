@@ -32,6 +32,7 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(1);
         setContentView(R.layout.player);
         if(PlayerState.mp == null && PlayerState.nowPlaying.size() > 0)
         	PlayerState.createMediaPlayer(getBaseContext());
@@ -405,6 +406,8 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
             PlayerState.mp.seekTo(progress);
             seek.setProgress(progress);
         }
+		else if(progress == 0)
+			return;
 		MediaTime current = new MediaTime(PlayerState.mp.getCurrentPosition());
 		MediaTime remaining = new MediaTime(PlayerState.mp.getDuration()-PlayerState.mp.getCurrentPosition());
 		txtStart.setText(current.getTime());

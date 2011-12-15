@@ -20,6 +20,7 @@
         <activity android:label="@string/app_name" android:name=".PlaylistsSelection"></activity>
         <activity android:label="@string/app_name" android:name=".PlaylistCreation"></activity>
         <activity android:label="@string/app_name" android:name=".PlaylistAdder"></activity>
+         <activity android:label="@string/app_name" android:name=".ViewPlaylist"></activity>
             <activity android:name=".Player" android:label="@string/app_name"></activity>
 
     </application>

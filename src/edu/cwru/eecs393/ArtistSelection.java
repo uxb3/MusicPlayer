@@ -28,7 +28,7 @@ public class ArtistSelection extends ExpandableListActivity{
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
+		setRequestedOrientation(1);
 		artists = MusicRetriever.getArtists();
 		Collections.sort(artists);
 		songs = MusicRetriever.getGroupedSongs("artist");

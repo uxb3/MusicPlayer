@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <TextView 
+        android:textAppearance="?android:attr/textAppearanceMedium"
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
     	android:id="@+id/txtQueue"/>
@@ -35,7 +36,8 @@
 		    	android:id="@+id/btnShuffle" 
 		    	android:padding="30dp"
 		        android:background="@drawable/shuffle" 
-		        android:layout_gravity="center"/>
+		        android:layout_gravity="center"
+		        />
 	        
 	        <Button 
 		    	android:layout_width="50dp"
@@ -43,7 +45,8 @@
 		    	android:id="@+id/btnRepeat" 
 		    	android:padding="30dp"
 		    	android:layout_gravity="center"
-		        android:background="@drawable/repeat" />
+		        android:background="@drawable/repeat" 
+		        />
 	        
 	        <Button 
 		    	android:layout_width="50dp"

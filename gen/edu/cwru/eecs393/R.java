@@ -43,6 +43,7 @@ public final class R {
     public static final class id {
         public static final int btnJump=0x7f06000b;
         public static final int btnNext=0x7f060013;
+        public static final int btnNowPlaying=0x7f060014;
         public static final int btnPlay=0x7f060012;
         public static final int btnPlus=0x7f06000c;
         public static final int btnPrev=0x7f060011;
@@ -72,6 +73,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050001;
+        public static final int done=0x7f050006;
         public static final int hello=0x7f050000;
         public static final int pause=0x7f050003;
         public static final int play=0x7f050002;
