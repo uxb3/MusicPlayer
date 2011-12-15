@@ -47,6 +47,26 @@ public class ArtistSelection extends ExpandableListActivity{
 		registerForContextMenu(getExpandableListView());
 	}
 	
+	public void onStart()
+	{
+		super.onStart();
+		artists = MusicRetriever.getArtists();
+		Collections.sort(artists);
+		songs = MusicRetriever.getGroupedSongs("artist");
+		Collections.sort(songs,new Item.ItemArtistComparator());
+		for (int x = 0; x < songs.size(); x++)
+		{
+			Collections.sort(songs.get(x), new Item.ItemComparator());
+		}
+		ExpandableListAdapter adapter = new ExpandableListAdapter(
+				this, 
+				artists,
+				songs, 
+				"artist");
+		
+		setListAdapter(adapter);
+	}
+	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
 	{
 		PlayerState.clearNowPlaying();

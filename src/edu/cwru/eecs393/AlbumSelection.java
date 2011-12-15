@@ -46,6 +46,26 @@ public class AlbumSelection extends ExpandableListActivity {
 		registerForContextMenu(getExpandableListView());
 	}
 	
+	public void onStart()
+	{
+		super.onStart();
+		albums = MusicRetriever.getAlbums();
+		Collections.sort(albums);
+		songs = MusicRetriever.getGroupedSongs("album"); 
+		Collections.sort(songs,new Item.ItemAlbumComparator());
+		for (int x = 0; x < songs.size(); x++)
+		{
+			Collections.sort(songs.get(x), new Item.ItemComparator());
+		}
+		ExpandableListAdapter adapter = new ExpandableListAdapter(
+				this, 
+				albums,
+				songs, 
+				"album");
+		
+		setListAdapter(adapter);
+	}
+	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
 	{
 		PlayerState.clearNowPlaying();
