@@ -89,9 +89,17 @@ public class PlaylistsSelection extends ListActivity {
 			startActivity(new Intent(PlaylistsSelection.this, PlaylistCreation.class));
 		}
 		else {
-			
-			PlaylistState.pid = pids[position];
-			startActivity(new Intent(PlaylistsSelection.this, ViewPlaylist.class));
+			Cursor cur = playlists.getSongs(pids[position]);
+			if (cur.getCount() == 0)
+			{
+				Toast toast = Toast.makeText(this, "Playlist is empty.", 3);
+				toast.show();
+			}
+			else
+			{
+				PlaylistState.pid = pids[position];
+				startActivity(new Intent(PlaylistsSelection.this, ViewPlaylist.class));
+			}
 		}
 		
 		Log.i(TAG, "Click");
