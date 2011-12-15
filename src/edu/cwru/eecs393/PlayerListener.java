@@ -15,7 +15,11 @@ public class PlayerListener implements OnCompletionListener {
 	public void onCompletion(MediaPlayer mp) {
 		if(PlayerState.currentSong >= PlayerState.nowPlaying.size()-1 && PlayerState.repeat != 1)
 		{
-			mp.stop();
+			Player.playing = false;
+			Player.btnPlay.setBackgroundResource(R.drawable.play);
+			PlayerState.mp.seekTo(0);
+            Player.seek.setProgress(0);
+            mp.pause();
 		}
 		else if (PlayerState.currentSong >= PlayerState.nowPlaying.size()-1 && PlayerState.repeat == 1)
 		{
@@ -46,7 +50,7 @@ public class PlayerListener implements OnCompletionListener {
 			try {
 				if (PlayerState.repeat != 2)
 					PlayerState.currentSong++;
-				//PlayerState.mp.reset();
+				PlayerState.mp.reset();
 				PlayerState.mp.setDataSource(PlayerState.context, PlayerState.nowPlaying.get(PlayerState.currentSong).getURI());
 				PlayerState.mp.prepare();
 				PlayerState.mp.start();

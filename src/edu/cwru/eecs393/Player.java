@@ -20,13 +20,19 @@ import android.widget.TextView;
 // Note you need to use BindService in order to do progress bar and update the activty look it up in Acitvty developer section
 public class Player extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	
-	Button btnPlay, btnPause, btnPrev, btnNext, btnShuffle, btnRepeat, btnJump;
+	static Button btnPlay;
+	Button btnPause;
+	Button btnPrev;
+	Button btnNext;
+	Button btnShuffle;
+	Button btnRepeat;
+	Button btnJump;
 	static ImageView imgArt;
 	static TextView txtQueue, txtStart, txtEnd;
 	String queue = "";
 	static MediaTime time;
 	static SeekBar seek;
-	boolean playing;
+	static boolean playing;
 	//Button btnStop;
     /** Called when the activity is first created. */
     @Override
