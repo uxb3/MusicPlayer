@@ -126,6 +126,14 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
         }
         updateQueueText();
     }
+    
+    public void onStart()
+    {
+    	super.onStart();
+    	seek.setMax(PlayerState.mp.getDuration());
+    	seek.setProgress(PlayerState.mp.getCurrentPosition());
+    	return;
+    }
 
     public static void updateQueueText()
     {
@@ -136,7 +144,7 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
     		x = PlayerState.currentSong-1;
     	else
     		x = 0;
-        for (x = x; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 2); x++)
+        for (; x < PlayerState.nowPlaying.size() && x < (PlayerState.currentSong + 2); x++)
         {
         	if(x == PlayerState.currentSong)
         		queue += ">>";
