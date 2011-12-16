@@ -54,8 +54,14 @@ public class MediaTime {
 	//Gives you the current time
 	
 	public String getTime() {
-		
-		return mins + ":" + seconds;
+		if (seconds>=10)
+		{
+			return mins + ":" + seconds;
+		}
+		else
+		{
+			return mins + ":0" + seconds;
+		}
 	}
 	
 	public int getDuration() {
