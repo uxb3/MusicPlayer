@@ -94,15 +94,17 @@ public class PlayerState {
 	{
 
 		public void run() {
-			while (mp != null
-                    && mp.getCurrentPosition() < mp.getDuration()) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                Player.seek.setProgress(mp.getCurrentPosition());
+			while (true) {
+				if (mp != null && mp.getCurrentPosition() < mp.getDuration())
+				{
+	                try {
+	                    Thread.sleep(500);
+	                } catch (InterruptedException e) {
+	                    // TODO Auto-generated catch block
+	                    e.printStackTrace();
+	                }
+	                Player.seek.setProgress(mp.getCurrentPosition());
+				}
             }
 
 			
