@@ -108,8 +108,8 @@ public class PlaylistsSelection extends ListActivity {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 		    ContextMenuInfo menuInfo) {
-		
-		if(v == getListView())
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		if(v == getListView() && info.position != 0)
 		{
 			menu.setHeaderTitle("Actions");
 			menu.add(Menu.NONE, 0, 0, "Delete playlist");
