@@ -53,9 +53,9 @@ public class PlaylistsAdapter {
 	/*
 	 * Playlist table methods
 	 */
-	public boolean createPlaylist(String name) {
+	public long createPlaylist(String name) {
 		
-		return (db.insert(PLAYLISTS, null, playlistContent(name)) > 0);
+		return db.insert(PLAYLISTS, null, playlistContent(name));
 	}
 	
 	public boolean deletePlaylist(long id) {
