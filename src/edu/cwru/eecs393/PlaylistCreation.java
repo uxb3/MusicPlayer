@@ -55,7 +55,7 @@ public class PlaylistCreation extends Activity implements OnClickListener, OnKey
 			if(PlaylistState.addSongMode) {
 				
 				PlaylistState.addSongMode = false;
-				Item currentSong = PlayerState.nowPlaying.get(PlayerState.currentSong);
+				Item currentSong = PlaylistState.plusSong;
 				playlists.addSong(id, currentSong.getId());
 				Toast toast = Toast.makeText(this, currentSong.title + " was added to new playlist.", Toast.LENGTH_SHORT);
 				toast.show();

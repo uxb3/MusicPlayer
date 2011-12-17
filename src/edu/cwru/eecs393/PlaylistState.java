@@ -14,4 +14,5 @@ public class PlaylistState {
 	
 	static long pid = -1;
 	static boolean addSongMode = false;
+	static Item plusSong = null;
 }

@@ -91,7 +91,7 @@ public class PlaylistsSelection extends ListActivity {
 		else if(PlaylistState.addSongMode) {
 			
 			PlaylistState.addSongMode = false;
-			Item currentSong = PlayerState.nowPlaying.get(PlayerState.currentSong);
+			Item currentSong = PlaylistState.plusSong;
 			if(playlists.addSong(pids[position], currentSong.getId())) {
 				
 				Toast toast = Toast.makeText(this, currentSong.title + " was added to playlist.", Toast.LENGTH_SHORT);

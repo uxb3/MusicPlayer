@@ -241,6 +241,7 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
 			
 			//lets PlaylistsSelection know that when you hit a playlist you want to add it to the playlist
 			PlaylistState.addSongMode = true;
+			PlaylistState.plusSong = PlayerState.nowPlaying.get(PlayerState.currentSong);
 			startActivity(new Intent(Player.this, PlaylistsSelection.class));
 			
 		}
