@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -237,6 +238,9 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
 		/* this button adds the nowplaying song to a playlist selected by the user */
 		else if(v.getId() == R.id.btnPlus) {
 			
+			//lets PlaylistsSelection know that when you hit a playlist you want to add it to the playlist
+			PlaylistState.addSongMode = true;
+			startActivity(new Intent(Player.this, PlaylistsSelection.class));
 			
 		}
 		else if (v.getId() == R.id.btnPlay && playing == false)

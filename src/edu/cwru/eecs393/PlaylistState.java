@@ -13,4 +13,5 @@ public class PlaylistState {
 	static final String KEY_SONGID = "songId";
 	
 	static long pid = -1;
+	static boolean addSongMode = false;
 }

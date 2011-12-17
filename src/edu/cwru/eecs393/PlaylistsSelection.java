@@ -74,21 +74,39 @@ public class PlaylistsSelection extends ListActivity {
 	
 	public void onBackPressed() {
 	   
+		if(PlaylistState.addSongMode)
+			PlaylistState.addSongMode = false;
 		startActivity(new Intent(PlaylistsSelection.this, Selection.class));
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-
-		/*String item = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();*/
 		
 		if(position == 0) {
 			
 			finish();
 			startActivity(new Intent(PlaylistsSelection.this, PlaylistCreation.class));
 		}
+		/* this means that we don't want to view the playlist, but add the nowplaying song to it */
+		else if(PlaylistState.addSongMode) {
+			
+			PlaylistState.addSongMode = false;
+			Item currentSong = PlayerState.nowPlaying.get(PlayerState.currentSong);
+			if(playlists.addSong(pids[position], currentSong.getId())) {
+				
+				Toast toast = Toast.makeText(this, currentSong.title + " was added to playlist.", Toast.LENGTH_SHORT);
+				toast.show();
+			}
+			else {
+				
+				Toast toast = Toast.makeText(this, currentSong.title + " is already in playlist.", Toast.LENGTH_SHORT);
+				toast.show();
+			}
+			finish();
+			
+		}
 		else {
+			//Check to make sure the playlist has songs
 			Cursor cur = playlists.getSongs(pids[position]);
 			if (cur.getCount() == 0)
 			{
