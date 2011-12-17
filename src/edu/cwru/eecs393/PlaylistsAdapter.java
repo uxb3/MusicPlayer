@@ -110,7 +110,7 @@ public class PlaylistsAdapter {
 	
 	public boolean deleteSong(long pid, long songid) {
 		
-		return (db.delete(ITEMS, pid + "=" + KEY_PID + " & "  + songid + "=" + KEY_SONGID, null) > 0 );
+		return (db.delete(ITEMS, pid + "=" + KEY_PID + " AND "  + songid + "=" + KEY_SONGID, null) > 0 );
 	}
 	
 	public Cursor getSongs(long pid) {

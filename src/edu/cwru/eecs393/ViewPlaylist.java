@@ -11,17 +11,24 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class ViewPlaylist extends ListActivity {
 
 	private static final String TAG = "ViewPlaylist";
 	private PlaylistsAdapter playlists;
 	private List<Item> list = new ArrayList<Item>();
+	private int pos = 0;
 	
 	public void onCreate(Bundle icicle) {
 		
@@ -51,6 +58,7 @@ public class ViewPlaylist extends ListActivity {
 		}
 		Log.i(TAG, "made the adapter");
 		setListAdapter(adapter);
+		registerForContextMenu(getListView());
 		Log.i(TAG, "set the adapter");
 	}
 	
@@ -89,6 +97,43 @@ public class ViewPlaylist extends ListActivity {
 		}
 		
 		startActivity(new Intent(ViewPlaylist.this, Player.class));
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+		    ContextMenuInfo menuInfo) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		if(v == getListView())
+		{
+			pos = info.position;
+			menu.setHeaderTitle("Actions");
+			menu.add(Menu.NONE, 0, 0, "Delete song");
+		}
+	}
+	
+	public boolean onContextItemSelected(MenuItem item)
+	{
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+		int songIndex = info.position;
+		if(item.getItemId() == 0)
+		{
+			long id = list.get(pos).getId();
+			if(playlists.deleteSong(PlaylistState.pid, id)) {
+				Log.i(TAG, "success in deleting song");
+				Toast toast = Toast.makeText(this, "Song deleted.", Toast.LENGTH_SHORT);
+				toast.show();
+				finish();
+				startActivity(new Intent(ViewPlaylist.this, ViewPlaylist.class));		
+			}
+			else {
+				
+				Log.i(TAG, "The song id was: " + id);
+				Toast toast = Toast.makeText(this, "Song was not deleted.", Toast.LENGTH_SHORT);
+				toast.show();
+			}
+				
+		}
+		return true;
 	}
 	
 	public void onBackPressed() {
