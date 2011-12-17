@@ -23,6 +23,7 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
 	Button btnShuffle;
 	Button btnRepeat;
 	Button btnJump;
+	Button btnPlus;
 	static ImageView imgArt;
 	static TextView txtQueue, txtStart, txtEnd;
 	String queue = "";
@@ -65,6 +66,9 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
         
         btnJump = (Button)this.findViewById(R.id.btnJump);
         btnJump.setOnClickListener(this);
+        
+        btnPlus = (Button)this.findViewById(R.id.btnPlus);
+        btnPlus.setOnClickListener(this);
         
         imgArt = (ImageView) this.findViewById(R.id.imgArt);
         
@@ -229,6 +233,11 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
 					e.printStackTrace();
 				}	
 			}
+		}
+		/* this button adds the nowplaying song to a playlist selected by the user */
+		else if(v.getId() == R.id.btnPlus) {
+			
+			
 		}
 		else if (v.getId() == R.id.btnPlay && playing == false)
 		{
