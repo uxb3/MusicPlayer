@@ -48,9 +48,18 @@ public class PlaylistCreation extends Activity implements OnClickListener, OnKey
 		
 		String result = playlistName.getText().toString();
 		if(result.length() > 0) {
-			playlists.createPlaylist(playlistName.getText().toString());
+			long id = playlists.createPlaylist(playlistName.getText().toString());
 			Log.i(TAG, "Successfully created playlist.");
 			finish();
+			// there is a song playing currently and we must add it to the newly created playlist
+			if(PlaylistState.addSongMode) {
+				
+				PlaylistState.addSongMode = false;
+				Item currentSong = PlayerState.nowPlaying.get(PlayerState.currentSong);
+				playlists.addSong(id, currentSong.getId());
+				Toast toast = Toast.makeText(this, currentSong.title + " was added to new playlist.", Toast.LENGTH_SHORT);
+				toast.show();
+			}
 			startActivity(new Intent(PlaylistCreation.this, PlaylistsSelection.class));
 		}
 		else {

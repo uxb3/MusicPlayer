@@ -235,7 +235,8 @@ public class Player extends Activity implements OnClickListener, OnSeekBarChange
 				}	
 			}
 		}
-		/* this button adds the nowplaying song to a playlist selected by the user */
+		/* this button adds the nowplaying song to a playlist selected by the user 
+		 NOTE need to change this so PlaylistState knows what the song was when this button was clicked */
 		else if(v.getId() == R.id.btnPlus) {
 			
 			//lets PlaylistsSelection know that when you hit a playlist you want to add it to the playlist
